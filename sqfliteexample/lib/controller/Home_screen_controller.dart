@@ -7,7 +7,7 @@ class HomeScreenController
   //Global variable
   static late Database database; // DB orikalum null aavilla enne parayan late keyword add cheythu.
 
-  static List<Map> myDataList = [];
+  static List<Map> myDataList = []; // Global variable to assign list of records from Add employee button
 
   // when we using static , we can call it using class name
   static Future<void> initDB()
@@ -21,12 +21,14 @@ class HomeScreenController
         });
   }
 
+  // Add Data
   static Future<void> addData({required String designation, required String name}) async
   {
     await database.rawInsert('INSERT INTO Employees(name, designation) VALUES(?, ?)', [name, designation]);
     getData(); // add cheytha data kittaan vendi
   }
 
+  // Get Data
   static Future<void> getData() async
   {
     // Get the records
@@ -34,4 +36,19 @@ class HomeScreenController
     myDataList = list;
     print(list);
   }
+
+  // Delete Data
+  static deleteData({required id})
+  async {
+    await database
+        .rawDelete('DELETE FROM Employees WHERE id = ?', [id]);
+  }
+
+  // Edit Data
+   static updateData()
+   async {
+     await database.rawUpdate(
+         'UPDATE Employees SET name = ?, value = ? WHERE name = ?',
+         ['updated name', '9876', 'some name']);
+   }
 }

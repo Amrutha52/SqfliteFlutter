@@ -21,9 +21,10 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
   }
 
+  // Home Screenil data varana vere wait cheyan call cheyunnu. Await is used for waiting.
   Future<void> fetchData()
   async {
-    await HomeScreenController.getData();
+    await HomeScreenController.getData(); // Restart cheyumbol data varan.
     setState(() {});
   }
   
@@ -105,8 +106,19 @@ class _HomeScreenState extends State<HomeScreen>
                             ],
                           ),
                           Spacer(),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                          //Edit Button
+                          IconButton(onPressed: () {
+
+                          },
+                              icon: Icon(Icons.edit)),
+                          //Delete Button
+                          IconButton(onPressed: () {
+                            HomeScreenController.deleteData(id : HomeScreenController.myDataList[index]["id"]);
+                            setState(() {
+
+                            });
+                          },
+                              icon: Icon(Icons.delete)),
                         ],
                       ),
                     ),
