@@ -38,10 +38,11 @@ class HomeScreenController
   }
 
   // Delete Data
-  static deleteData({required id})
+  static deleteData({var id})
   async {
     await database
         .rawDelete('DELETE FROM Employees WHERE id = ?', [id]);
+    getData();
   }
 
   // Edit Data

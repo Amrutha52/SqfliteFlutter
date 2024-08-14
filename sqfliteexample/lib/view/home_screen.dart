@@ -64,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     SizedBox(height: 20,),
                     ElevatedButton(
-                      onPressed: () {
-                        HomeScreenController.addData(designation: designationController.text, name: nameController.text);
+                      onPressed: () async {
+                        await HomeScreenController.addData(designation: designationController.text, name: nameController.text); // await vilichale
                         setState(() {});
                       },
                       child: Text("Add Employee"),
@@ -107,13 +107,70 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                           Spacer(),
                           //Edit Button
-                          IconButton(onPressed: () {
-
+                          IconButton(onPressed: ()
+                          {
+                            showDialog(context: context, builder: (context) => AlertDialog(
+                              backgroundColor: Colors.blueGrey.shade100,
+                              content: Container(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min, // Alert dialogne avashyathine ulla size mathram kittaan
+                                    children: [
+                                      TextField(
+                                        controller: nameController,
+                                        decoration: InputDecoration(
+                                          hintText: "Name",
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          border: OutlineInputBorder(),
+                                        ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      TextField(
+                                        controller: designationController,
+                                        decoration: InputDecoration(
+                                          hintText: "Designation",
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          border: OutlineInputBorder(),
+                                        ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await HomeScreenController.addData(designation: designationController.text, name: nameController.text); // await vilichale
+                                                setState(() {});
+                                              },
+                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 50)),
+                                              child: Text("Cancel"),
+                                            ),
+                                            SizedBox(width: 20,),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                await HomeScreenController.addData(designation: designationController.text, name: nameController.text); // await vilichale
+                                                setState(() {});
+                                              },
+                                              style: ElevatedButton.styleFrom(fixedSize: const Size(100, 50)),
+                                              child: Text("Update"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ));
                           },
                               icon: Icon(Icons.edit)),
                           //Delete Button
-                          IconButton(onPressed: () {
-                            HomeScreenController.deleteData(id : HomeScreenController.myDataList[index]["id"]);
+                          IconButton(onPressed: () async {
+                            await HomeScreenController.deleteData(id : HomeScreenController.myDataList[index]["id"]);
                             setState(() {
 
                             });
