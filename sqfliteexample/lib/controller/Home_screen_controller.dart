@@ -46,10 +46,11 @@ class HomeScreenController
   }
 
   // Edit Data
-   static updateData()
+   static  Future<void> updateData({required String name, required String designation, required var id})
    async {
      await database.rawUpdate(
-         'UPDATE Employees SET name = ?, value = ? WHERE name = ?',
-         ['updated name', '9876', 'some name']);
+         'UPDATE Employees SET name = ?, designation = ? WHERE id = ?',
+         [name, designation, id]);
+     getData();
    }
 }

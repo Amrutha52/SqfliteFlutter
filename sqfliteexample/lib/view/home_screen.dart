@@ -159,8 +159,9 @@ class _HomeScreenState extends State<HomeScreen>
                                             SizedBox(width: 20,),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                await HomeScreenController.addData(designation: designationController.text, name: nameController.text); // await vilichale
+                                                await HomeScreenController.updateData(name: nameUpdateController.text, designation: designationUpdateController.text, id: HomeScreenController.myDataList[index]["id"]); // await vilichale
                                                 setState(() {});
+                                                Navigator.pop(context);
                                               },
                                               style: ElevatedButton.styleFrom(fixedSize: const Size(100, 50)),
                                               child: Text("Update"),
