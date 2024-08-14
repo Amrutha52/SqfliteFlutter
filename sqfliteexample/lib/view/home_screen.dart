@@ -14,6 +14,10 @@ class _HomeScreenState extends State<HomeScreen>
   TextEditingController nameController = TextEditingController();
   TextEditingController designationController = TextEditingController();
 
+  // For updating
+  TextEditingController nameUpdateController = TextEditingController();
+  TextEditingController designationUpdateController = TextEditingController();
+
   @override
   void initState() {
     fetchData();
@@ -109,6 +113,9 @@ class _HomeScreenState extends State<HomeScreen>
                           //Edit Button
                           IconButton(onPressed: ()
                           {
+                            nameUpdateController.text = HomeScreenController.myDataList[index]["name"];
+                            designationUpdateController.text = HomeScreenController.myDataList[index]["designation"];
+
                             showDialog(context: context, builder: (context) => AlertDialog(
                               backgroundColor: Colors.blueGrey.shade100,
                               content: Container(
@@ -118,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     mainAxisSize: MainAxisSize.min, // Alert dialogne avashyathine ulla size mathram kittaan
                                     children: [
                                       TextField(
-                                        controller: nameController,
+                                        controller: nameUpdateController,
                                         decoration: InputDecoration(
                                           hintText: "Name",
                                           filled: true,
@@ -128,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                       SizedBox(height: 20,),
                                       TextField(
-                                        controller: designationController,
+                                        controller: designationUpdateController,
                                         decoration: InputDecoration(
                                           hintText: "Designation",
                                           filled: true,
@@ -143,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           children: [
                                             ElevatedButton(
                                               onPressed: () async {
-                                                await HomeScreenController.addData(designation: designationController.text, name: nameController.text); // await vilichale
+                                                Navigator.pop(context);
                                                 setState(() {});
                                               },
                                               style: ElevatedButton.styleFrom(fixedSize: const Size(100, 50)),
